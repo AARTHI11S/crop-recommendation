@@ -1,172 +1,226 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Crop Recommendation - TNAU</title>
     <style>
-        .main-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    margin: 30px;
-    gap: 40px;
-}
-        body {
-            background-color: #adf8cc;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+      .main-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        margin: 30px;
+        gap: 40px;
+      }
+      body {
+        background-color: #adf8cc;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
 
-        .header {
-            text-align: center;
-            padding: 20px;
-        }
+      .header {
+        text-align: center;
+        padding: 20px;
+      }
 
-        .header img {
-            width: 1000px;
-            height: 150px;
-        }
+      .header img {
+        width: 1000px;
+        height: 150px;
+      }
 
-        .header h1 {
-            margin: 10px 0 0;
-            font-size: 28px;
-            color: #006400;
-        }
+      .header h1 {
+        margin: 10px 0 0;
+        font-size: 28px;
+        font-family: "Times New Roman", Times, serif;
+        color: #006400;
+      }
 
-        .header h2 {
-            margin: 5px;
-            font-size: 20px;
-            color: #333;
-        }
+      .header h3 {
+        margin: 5px;
+        font-size: 25 px;
+        font-family: "Times New Roman", Times, serif;
+        color: #368b5b;
+      }
+      .header h5 {
+        margin: 5px;
+        font-size: 18px;
+        font-family: "Times New Roman", Times, serif;
+        color: #7d62ea;
+      }
+      .form-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+      }
 
-        .form-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 30px;
-        }
+      form {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
 
-        form {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-        }
+      table td {
+        padding: 10px;
+      }
 
-        table td {
-            padding: 10px;
-        }
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
 
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
+      input {
+        width: 450px;
+        padding: 8px;
+      }
 
-        input {
-            width: 450px;
-            padding: 8px;
-        }
+      button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        width: 350px;
+        font-size: large;
+        font-family: "Times New Roman", Times, serif;
+        font-weight: bold;
+        background-color: #2e8b57;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
 
-        button {
-            margin-top: 15px;
-            padding: 10px 20px;
-            width: 350px;
-            font-size: large;
-            font-family: 'Times New Roman', Times, serif;
-            font-weight: bold;
-            background-color: #2e8b57;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
+      .result {
+        text-align: center;
+        margin-top: 150px;
+        font-size: 30px;
+        color: #004d00;
+        max-width: 350px;
+      }
 
-        .result {
-            text-align: center;
-            margin-top: 150px;
-            font-size: 30px;
-            color: #004d00;
-            max-width: 350px;
-        }
+      .highlight {
+        color: #b30000;
+      }
 
-        .highlight {
-            color: #b30000;
-        }
+      .crop-box {
+        display: inline-block;
+        margin: 15px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 250px;
+      }
 
-        .crop-box {
-            display: inline-block;
-            margin: 15px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 250px;
-        }
+      .crop-box h3 {
+        margin: 10px 0;
+        font-size: 18px;
+        color: #333;
+      }
 
-        
-        .crop-box h3 {
-            margin: 10px 0;
-            font-size: 18px;
-            color: #333;
-        }
+      .crop-box p {
+        font-size: 16px;
+        color: #555;
+      }
 
-        .crop-box p {
-            font-size: 16px;
-            color: #555;
-        }
-
-        .recommended { background-color: #d3f9d8; }
-        .slightly-recommended { background-color: #fff3cd; }
-        .not-recommended { background-color: #f8d7da; }
+      .recommended {
+        background-color: #66eb9d;
+      }
+      .slightly-recommended {
+        background-color: #f9e79f;
+      }
+      .not-recommended {
+        background-color: #f1939b;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="header">
-        <img src="https://tse1.mm.bing.net/th?id=OIP.oVk6oeXa4cyHCTYdAwAq6gAAAA&pid=Api&P=0&h=180" alt="TNAU Logo">
-     <br>
-        <h1>AI-based Smart Crop Recommendation System for Sustainable Agricultural Production:</h1>
-        <h3><i>A Data-driven Approach to Minimize Resource Use and Maximize Yield</i></h3>
+      <img
+        src="https://tse1.mm.bing.net/th?id=OIP.oVk6oeXa4cyHCTYdAwAq6gAAAA&pid=Api&P=0&h=180"
+        alt="TNAU Logo"
+      />
+      <br />
+      <h1>
+        AI-based Smart Crop Recommendation System for Sustainable Agricultural
+        Production:
+      </h1>
+      <h3>
+        <i
+          >A Data-driven Approach to Minimize Resource Use and Maximize Yield</i>
+      </h3>
+      <h5>
+        <i> AARTHI S, MANIMEGALAI S (STUDENT B.TECH - AIT), AEC&RI, TNAU, COIMBATORE</i><br/>
+        <i>SAKTHIVEL R, GIS & DATA SCIENCE EXPERT, ICF, BANGALORE</i>
+      </h5>
     </div>
-<div class="main-container">
-    <div class="form-container">
+    <div class="main-container">
+      <div class="form-container">
         <form action="/predict" method="POST">
-            <table>
-                <tr><td><label for="N">Nitrogen (N)</label><input name="N" required></td></tr>
-                <tr><td><label for="P">Phosphorus (P)</label><input name="P" required></td></tr>
-                <tr><td><label for="K">Potassium (K)</label><input name="K" required></td></tr>
-                <tr><td><label for="temperature">Temperature (°C)</label><input name="temperature" required></td></tr>
-                <tr><td><label for="humidity">Humidity (%)</label><input name="humidity" required></td></tr>
-                <tr><td><label for="ph">pH</label><input name="ph" required></td></tr>
-                <tr><td><label for="rainfall">Rainfall (mm)</label><input name="rainfall" required></td></tr>
-                <tr><td style="text-align:center;"><button type="submit">Predict</button></td></tr>
-            </table>
+          <table>
+            <tr>
+              <td>
+                <label for="N">Nitrogen (N)</label><input name="N" required />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="P">Phosphorus (P)</label><input name="P" required />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="K">Potassium (K)</label><input name="K" required />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="temperature">Temperature (°C)</label
+                ><input name="temperature" required />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="humidity">Humidity (%)</label
+                ><input name="humidity" required />
+              </td>
+            </tr>
+            <tr>
+              <td><label for="ph">pH</label><input name="ph" required /></td>
+            </tr>
+            <tr>
+              <td>
+                <label for="rainfall">Rainfall (mm)</label
+                ><input name="rainfall" required />
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align: center">
+                <button type="submit">Predict</button>
+              </td>
+            </tr>
+          </table>
         </form>
-    </div>
+      </div>
 
-    <div class="result">
+      <div class="result">
         {% if prediction_text %}
-            <div class="crop-box recommended">
-                
-                <h3>Recommended Crop</h3>
-                <p>{{ prediction_text }}</p>
-            </div>
+        <div class="crop-box recommended">
+          <h3>Recommended Crop</h3>
+          <p>{{ prediction_text }}</p>
+        </div>
 
-            <div class="crop-box slightly-recommended">
-      
-                <h3>Slightly Recommended Crops</h3>
-                <p>{{ slightly_recommended | join(', ') }}</p>
-            </div>
+        <div class="crop-box slightly-recommended">
+          <h3>Slightly Recommended Crops</h3>
+          <p>{{ slightly_recommended | join(', ') }}</p>
+        </div>
 
-            <div class="crop-box not-recommended">
-
-                <h3>Not Recommended Crops</h3>
-                <p>{{ not_recommended | join(', ') }}</p>
-            </div>
+        <div class="crop-box not-recommended">
+          <h3>Not Recommended Crops</h3>
+          <p>{{ not_recommended | join(', ') }}</p>
+        </div>
         {% endif %}
+      </div>
     </div>
-    </div>
-</body>
+  </body>
 </html>
